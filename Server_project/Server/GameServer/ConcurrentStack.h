@@ -54,3 +54,9 @@ private:
 	mutex _mutex;
 	condition_variable _condVar;
 };
+
+template<typename T>
+class LockFreeStack
+{
+
+};
