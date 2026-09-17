@@ -15,16 +15,16 @@ using namespace std::chrono_literals;
 // __declspec(thread) int32 value;
 
 LockQueue<int32> q;
-LockStack<int32> s;
+LockFreeStack<int32> s;
 
 void Push()
 {
 	while (true)
 	{
 		int32 value = rand() % 100;
-		q.Push(value);
+		s.Push(value);
 
-		this_thread::sleep_for(10ms);
+		//this_thread::sleep_for(10ms);
 	}
 }
 
@@ -33,7 +33,7 @@ void Pop()
 	while (true)
 	{
 		int32 outValue;
-		if (q.TryPop(outValue))
+		if (s.TryPop(outValue))
 			continue;
 
 		cout << outValue << endl;
